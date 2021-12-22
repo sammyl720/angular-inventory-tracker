@@ -1,0 +1,23 @@
+<form class="auth-form" [formGroup]="authForm" (submit)="onSubmit($event)">
+  <h3 class="title">{{ authType | titlecase }}</h3>
+  <div class="form-control">
+    <label for="username">Username</label>
+    <input type="username" id="username" formControlName="username" />
+  </div>
+  <div class="form-control">
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" />
+  </div>
+  <button type="submit" [disabled]="!authForm.valid">Submit</button>
+  <small class="footnote">
+    <ng-container *ngIf="authType == 'login'">
+      Don't have an account? <a [routerLink]="['/signup']">Signup</a>
+    </ng-container>
+    <ng-container *ngIf="authType == 'signup'">
+      Already have an account? <a [routerLink]="['/login']">Login</a>
+    </ng-container>
+  </small>
+</form>
+<ng-container *ngIf="errorMessage">
+  <p class="error-message">{{ errorMessage }}</p>
+</ng-container>
